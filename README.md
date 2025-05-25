@@ -3,5 +3,3 @@
 Welcome to my repo for experimenting with machine learning concepts in Python! Feel free to look around.
 
 ## Contents
-
-- [Spark Multi-Layer Perceptron](./spark-mlp/)
