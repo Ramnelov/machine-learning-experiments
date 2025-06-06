@@ -31,13 +31,27 @@ y_test = test_data[:, 1:]
 
 HIDDEN_UNITS = 10
 
+
+class MLP(tf.keras.Model):
+    """A simple multi-layered perceptron (MLP) with one hidden layer."""
+
+    def __init__(self, hidden_units, activation=tf.keras.activations.tanh):
+        super(MLP, self).__init__()
+        self.model = tf.keras.Sequential(
+            [
+                tf.keras.layers.Dense(
+                    hidden_units, activation=activation, input_shape=(1,)
+                ),
+                tf.keras.layers.Dense(1),
+            ]
+        )
+
+    def call(self, inputs, training=False):
+        return self.model(inputs)
+
+
 # Define the model
-model = tf.keras.Sequential(
-    [
-        tf.keras.layers.Dense(HIDDEN_UNITS, activation="tanh", input_shape=(1,)),
-        tf.keras.layers.Dense(1),
-    ]
-)
+model = MLP(HIDDEN_UNITS)
 
 # Train the model
 model.compile(
