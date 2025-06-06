@@ -10,7 +10,9 @@ from data import generate_data
 from torch.utils.data import DataLoader, TensorDataset
 from tqdm import tqdm
 
-np.random.seed(123)  # For reproducibility
+# For reproducibility
+np.random.seed(123)
+torch.manual_seed(123)
 
 data = generate_data()  # shape: (num_samples, 2)
 
