@@ -40,8 +40,22 @@ train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
 
 HIDDEN_UNITS = 10
 
+
+class MLP(nn.Module):
+    """A simple multi-layered perceptron (MLP) with one hidden layer."""
+
+    def __init__(self, hidden_units, activation=nn.Tanh):
+        super(MLP, self).__init__()
+        self.model = nn.Sequential(
+            nn.Linear(1, hidden_units), activation(), nn.Linear(hidden_units, 1)
+        )
+
+    def forward(self, x):
+        return self.model(x)
+
+
 # Define the model
-model = nn.Sequential(nn.Linear(1, HIDDEN_UNITS), nn.Tanh(), nn.Linear(HIDDEN_UNITS, 1))
+model = MLP(HIDDEN_UNITS)
 
 # Train the model
 optimizer = optim.SGD(model.parameters(), lr=LEARNING_RATE)
